@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>This Week — Study Tracker</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel2: #1e222b;
+    --border: #2a2f3a;
+    --text: #e6e8ec;
+    --muted: #8b93a3;
+    --accent: #5eb3ff;
+    --accent2: #4ade80;
+    --warn: #f5b942;
+    --done: #2f3a2f;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 16px 12px 80px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 1.25rem; margin-bottom: 4px; }
+  .sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 18px; line-height: 1.4; }
+  .progress-bar {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .progress-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; text-align: right; }
+
+  .day {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .day-header {
+    padding: 12px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    gap: 8px;
+  }
+  .day-header:hover { background: var(--panel2); }
+  .day-header-left { display: flex; flex-direction: column; min-width: 0; }
+  .day-title { font-weight: 600; font-size: 0.95rem; }
+  .day-date { color: var(--muted); font-size: 0.78rem; font-weight: 400; }
+  .day-count { color: var(--muted); font-size: 0.8rem; flex-shrink: 0; }
+  .day-body { padding: 0 12px 12px; display: none; }
+  .day-body.open { display: block; }
+
+  .block {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .block:last-child { border-bottom: none; }
+  .block input[type=checkbox] {
+    margin-top: 2px;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent2);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .block-content { flex: 1; min-width: 0; }
+  .block-title { font-weight: 500; font-size: 0.9rem; line-height: 1.35; }
+  .block.checked .block-title { text-decoration: line-through; color: var(--muted); }
+  .block-time { color: var(--accent); font-size: 0.75rem; font-weight: 600; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-bottom: 2px; }
+  .block-note { color: var(--muted); font-size: 0.78rem; margin-top: 3px; line-height: 1.35; }
+  .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 600;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .tag.math { background: rgba(94,179,255,0.15); color: var(--accent); }
+  .tag.digital { background: rgba(74,222,128,0.15); color: var(--accent2); }
+  .tag.rev { background: rgba(245,185,66,0.15); color: var(--warn); }
+  .tag.practice { background: rgba(216,140,255,0.15); color: #d88cff; }
+  .tag.rest { background: rgba(139,147,163,0.15); color: var(--muted); }
+
+  @media (max-width: 400px) {
+    .block-time { font-size: 0.72rem; }
+    .day-title { font-size: 0.9rem; }
+  }
+
+  .rest-day .day-header { background: var(--panel2); }
+  .footer-note {
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 28px;
+    line-height: 1.5;
+  }
+  .reset-btn {
+    display: block;
+    margin: 20px auto 0;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .reset-btn:hover { border-color: var(--warn); color: var(--warn); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>This Week's Plan</h1>
+  <div class="sub">Math + Digital Electronics only — EMFT waits till EMT-II classes start. Tap a day to expand, tick as you go.</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 0 done</div>
+
+  <div id="days"></div>
+
+  <button class="reset-btn" id="resetBtn">Reset all checkboxes</button>
+  <div class="footer-note">
+    Weekly target, not daily perfection. Missing one block doesn't break the week — skipping the whole week does. Revision blocks matter as much as new lectures.
+  </div>
+</div>
+
+<script>
+const data = [
+  {
+    day: "Day 1 — Friday", date: "Jul 10",
+    blocks: [
+      {t:"9:00–10:30", tag:"digital", title:"Digital Electronics: Lesson 3 — finish Boolean Algebra Part II", note:"Pick up from 37:09 min where you left off"},
+      {t:"10:45–11:15", tag:"rev", title:"Revision: skim notes from Lesson 1–2 (Orientation + Boolean Algebra I)", note:"Just re-read, don't rewatch"},
+      {t:"11:30–1:00", tag:"math", title:"Maths: Lesson 3 (first half)", note:"Watch at 1.25–1.5x, pause to solve examples yourself"},
+      {t:"1:00–1:30", tag:"practice", title:"DPP: Lesson 3 Maths topic", note:"Do it right after the lecture while it's fresh"},
+      {t:"4:00–5:00", tag:"digital", title:"Digital Electronics: Lesson 4", note:""},
+      {t:"5:00–5:30", tag:"practice", title:"DPP: Lesson 3–4 Digital Electronics", note:""},
+    ]
+  },
+  {
+    day: "Day 2 — Saturday", date: "Jul 11",
+    blocks: [
+      {t:"9:00–10:30", tag:"digital", title:"Digital Electronics: next lecture", note:""},
+      {t:"10:45–11:15", tag:"rev", title:"Revision: quick problems from yesterday's Linear Algebra section", note:"3–5 problems, not full worksheet"},
+      {t:"11:30–1:00", tag:"math", title:"Maths: Linear Algebra – Part 1 (finish it)", note:""},
+      {t:"1:00–1:30", tag:"practice", title:"DPP: Linear Algebra (full topic now that it's done)", note:""},
+      {t:"4:00–5:00", tag:"digital", title:"Digital Electronics: next lecture", note:"Gap-closing day 2 of 5"},
+      {t:"5:00–5:30", tag:"practice", title:"DPP: Digital Electronics", note:""},
+    ]
+  },
+  {
+    day: "Day 3 — Sunday", date: "Jul 12",
+    blocks: [
+      {t:"10:00–11:00", tag:"rev", title:"Revision only: re-skim Digital Electronics notes so far", note:"No new lectures today"},
+      {t:"11:15–12:15", tag:"practice", title:"PYQs: Boolean Algebra / Digital Electronics basics", note:"Pull a few GATE PYQs on whatever's covered so far"},
+      {t:"12:15–1:00", tag:"practice", title:"PYQs: Linear Algebra basics", note:"Light — just 4–5 questions"},
+      {t:"—", tag:"rest", title:"Rest of the day: genuinely free", note:"This is the built-in low-intensity day. Use it."},
+    ]
+  },
+  {
+    day: "Day 4 — Monday", date: "Jul 13",
+    blocks: [
+      {t:"9:00–10:30", tag:"digital", title:"Digital Electronics: next lecture", note:"Gap-closing day 3"},
+      {t:"10:45–11:15", tag:"rev", title:"Revision: notes check for Digital Electronics", note:""},
+      {t:"11:30–1:00", tag:"math", title:"Maths: next lecture in queue (Calculus continuation)", note:""},
+      {t:"1:00–1:30", tag:"practice", title:"DPP: today's Maths topic", note:""},
+      {t:"4:00–5:00", tag:"digital", title:"Digital Electronics: next lecture", note:"Gap-closing day 3, second lecture"},
+      {t:"5:00–5:30", tag:"practice", title:"DPP: Digital Electronics", note:""},
+    ]
+  },
+  {
+    day: "Day 5 — Tuesday", date: "Jul 14",
+    blocks: [
+      {t:"9:00–10:30", tag:"digital", title:"Digital Electronics: next lecture", note:"Gap-closing day 4"},
+      {t:"10:45–11:15", tag:"rev", title:"Revision: Maths problems from Monday's lecture", note:""},
+      {t:"11:30–1:00", tag:"math", title:"Maths: practice set, no new lecture today", note:"Consolidate rather than push forward"},
+      {t:"1:00–1:30", tag:"practice", title:"PYQs: Maths topics covered this week", note:"Mix of Calculus + Linear Algebra questions"},
+      {t:"4:00–5:00", tag:"digital", title:"Digital Electronics: next lecture", note:"Gap-closing day 4, second lecture"},
+      {t:"5:00–5:30", tag:"practice", title:"DPP: Digital Electronics", note:""},
+    ]
+  },
+  {
+    day: "Day 6 — Wednesday", date: "Jul 15",
+    blocks: [
+      {t:"9:00–10:30", tag:"digital", title:"Digital Electronics: next lecture", note:"Gap-closing day 5 — should be caught up to live batch by end of today"},
+      {t:"10:45–11:15", tag:"rev", title:"Revision: full skim of week's Digital Electronics notes", note:""},
+      {t:"11:30–1:00", tag:"math", title:"Maths: next lecture in queue", note:""},
+      {t:"1:00–1:30", tag:"practice", title:"DPP: today's Maths topic", note:""},
+      {t:"4:00–5:00", tag:"digital", title:"Digital Electronics: next lecture if gap remains, else free", note:"If caught up already, use this slot for PYQs instead"},
+      {t:"5:00–5:30", tag:"practice", title:"PYQs: Digital Electronics topics covered this week", note:""},
+    ]
+  },
+  {
+    day: "Day 7 — Thursday", date: "Jul 16",
+    blocks: [
+      {t:"9:00–10:00", tag:"rev", title:"Full week revision: Digital Electronics", note:"Re-skim everything from this week, no new content"},
+      {t:"10:15–11:15", tag:"rev", title:"Full week revision: Maths", note:"Redo 8–10 mixed problems from the week"},
+      {t:"11:30–1:00", tag:"practice", title:"PYQs: mixed set, both subjects", note:"Simulate a mini test — no notes open while solving"},
+      {t:"1:00–1:30", tag:"rev", title:"Quick self check-in", note:"What worked, what didn't — adjust next week's pace accordingly, not guilt"},
+      {t:"—", tag:"rest", title:"Afternoon/evening: free", note:"You earned a real stop here"},
+    ]
+  },
+];
+
+const container = document.getElementById("days");
+const STORAGE_KEY = "week_schedule_v1";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { state = {}; }
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function updateProgress() {
+  let total = 0, done = 0;
+  data.forEach((d, di) => {
+    d.blocks.forEach((b, bi) => {
+      if (b.tag === "rest") return;
+      total++;
+      if (state[di+"-"+bi]) done++;
+    });
+  });
+  document.getElementById("progressFill").style.width = total ? (done/total*100)+"%" : "0%";
+  document.getElementById("progressLabel").textContent = done + " / " + total + " done";
+}
+
+data.forEach((d, di) => {
+  const dayEl = document.createElement("div");
+  dayEl.className = "day" + (d.blocks.every(b=>b.tag==="rest"||b.tag==="rev") && d.day.includes("Sunday") ? " rest-day" : "");
+
+  const header = document.createElement("div");
+  header.className = "day-header";
+  header.innerHTML = `<div class="day-header-left"><span class="day-title">${d.day}</span><span class="day-date">${d.date}</span></div><span class="day-count" id="count-${di}"></span>`;
+  header.addEventListener("click", () => {
+    body.classList.toggle("open");
+  });
+
+  const body = document.createElement("div");
+  body.className = "day-body";
+  if (di === 0) body.classList.add("open");
+
+  d.blocks.forEach((b, bi) => {
+    const key = di+"-"+bi;
+    const blockEl = document.createElement("div");
+    blockEl.className = "block" + (state[key] ? " checked" : "");
+    blockEl.innerHTML = `
+      <input type="checkbox" ${state[key] ? "checked" : ""} data-key="${key}">
+      <div class="block-content">
+        <div class="block-time">${b.t} <span class="tag ${b.tag}">${b.tag}</span></div>
+        <div class="block-title">${b.title}</div>
+        ${b.note ? `<div class="block-note">${b.note}</div>` : ""}
+      </div>
+    `;
+    const cb = blockEl.querySelector("input");
+    cb.addEventListener("change", () => {
+      state[key] = cb.checked;
+      blockEl.classList.toggle("checked", cb.checked);
+      save();
+      updateProgress();
+      updateDayCount(di);
+    });
+    body.appendChild(blockEl);
+  });
+
+  dayEl.appendChild(header);
+  dayEl.appendChild(body);
+  container.appendChild(dayEl);
+});
+
+function updateDayCount(di) {
+  const d = data[di];
+  let total = 0, done = 0;
+  d.blocks.forEach((b, bi) => {
+    if (b.tag === "rest") return;
+    total++;
+    if (state[di+"-"+bi]) done++;
+  });
+  const el = document.getElementById("count-"+di);
+  if (el) el.textContent = total ? done+"/"+total : "";
+}
+
+data.forEach((d, di) => updateDayCount(di));
+updateProgress();
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  if (confirm("Reset all checkboxes for this week?")) {
+    state = {};
+    save();
+    location.reload();
+  }
+});
+</script>
+</body>
+</html>
