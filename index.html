@@ -135,7 +135,7 @@
 <body>
 <div class="wrap">
   <h1>This Week's Plan</h1>
-  <div class="sub">Math + Digital Electronics only — EMFT waits till EMT-II classes start. Tap a day to expand, tick as you go.</div>
+  <div class="sub">Math + Digital Electronics only — EMFT waits till EMT-II classes start. No daily DPPs — PYQs only at checkpoints, every 5–6 lectures. Tap a day to expand, tick as you go.</div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div class="progress-label" id="progressLabel">0 / 0 done</div>
 
@@ -153,73 +153,70 @@ const data = [
     day: "Day 1 — Friday", date: "Jul 10",
     blocks: [
       {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 4", note:"2.5 hr lecture"},
-      {t:"11:30–12:00", tag:"rev", title:"Revision: skim notes from Lessons 1–3", note:"Just re-read, don't rewatch"},
-      {t:"1:00–4:00", tag:"math", title:"Maths: Lesson 3", note:"3 hr lecture — watch at 1.25–1.5x, pause to solve examples yourself"},
-      {t:"4:00–4:30", tag:"practice", title:"DPP: Lesson 3 Maths", note:"Do it right after the lecture while it's fresh"},
-      {t:"5:00–5:30", tag:"practice", title:"DPP: Lesson 4 Digital Electronics", note:""},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 5", note:"2.5 hr lecture — second one today"},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 3 (first half)", note:"1.5 hr — spans into tomorrow"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min — skim Lessons 1–5"},
+      {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min — skim Lesson 3 so far"},
     ]
   },
   {
     day: "Day 2 — Saturday", date: "Jul 11",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 5", note:"2.5 hr lecture"},
-      {t:"11:30–12:00", tag:"practice", title:"DPP: Lesson 5", note:""},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 6", note:"2.5 hr lecture — second one today, this is a gap-closing day"},
-      {t:"3:30–4:00", tag:"practice", title:"DPP: Lesson 6", note:""},
-      {t:"4:15–4:45", tag:"rev", title:"Maths: revision — redo problems from Lesson 3", note:"No new lecture today, just consolidating"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 6", note:"2.5 hr lecture"},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 7", note:"2.5 hr lecture — second one today"},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 3 (second half)", note:"1.5 hr — completes Lesson 3"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min"},
+      {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min — full Lesson 3 recap"},
     ]
   },
   {
     day: "Day 3 — Sunday", date: "Jul 12",
     blocks: [
-      {t:"10:00–11:00", tag:"rev", title:"Revision only: re-skim Digital Electronics notes (Lessons 1–6)", note:"No new lectures today"},
-      {t:"11:15–12:15", tag:"practice", title:"PYQs: Digital Electronics basics", note:"Pull a few GATE PYQs on whatever's covered so far"},
-      {t:"12:15–1:00", tag:"practice", title:"PYQs: Maths (Lesson 3 topics)", note:"Light — just 4–5 questions"},
-      {t:"—", tag:"rest", title:"Rest of the day: genuinely free", note:"This is the built-in low-intensity day. Use it."},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 8", note:"2.5 hr lecture"},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 9", note:"2.5 hr lecture — second one today"},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 4 (first half)", note:"1.5 hr"},
+      {t:"5:30–6:30", tag:"practice", title:"PYQs: Digital Electronics (Lessons 4–9)", note:"Checkpoint — 6 lectures done, 1 hr on PYQs for this stretch"},
+      {t:"6:30–7:00", tag:"rev", title:"Revision: Maths", note:"30 min"},
     ]
   },
   {
     day: "Day 4 — Monday", date: "Jul 13",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 7", note:"2.5 hr lecture"},
-      {t:"11:30–12:00", tag:"practice", title:"DPP: Lesson 7", note:""},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 8", note:"2.5 hr lecture — second one today"},
-      {t:"3:30–4:00", tag:"practice", title:"DPP: Lesson 8", note:""},
-      {t:"4:15–4:45", tag:"rev", title:"Maths: revision — mixed problems from Lesson 3", note:"No new lecture today"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 10", note:"2.5 hr lecture"},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 11", note:"2.5 hr lecture — second one today"},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 4 (second half)", note:"1.5 hr — completes Lesson 4"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min"},
+      {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min — full Lesson 4 recap"},
     ]
   },
   {
     day: "Day 5 — Tuesday", date: "Jul 14",
     blocks: [
-      {t:"9:00–12:00", tag:"math", title:"Maths: Lesson 4", note:"3 hr lecture"},
-      {t:"12:00–12:30", tag:"practice", title:"DPP: Lesson 4 Maths", note:""},
-      {t:"1:30–4:00", tag:"digital", title:"Digital Electronics: Lesson 9", note:"2.5 hr lecture"},
-      {t:"4:00–4:30", tag:"practice", title:"DPP: Lesson 9", note:""},
-      {t:"5:00–7:30", tag:"digital", title:"Digital Electronics: Lesson 10", note:"2.5 hr lecture — second one today, this is a long day, pace yourself"},
-      {t:"7:30–8:00", tag:"practice", title:"DPP: Lesson 10", note:""},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 12", note:"2.5 hr lecture"},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 13", note:"2.5 hr lecture — this catches you up to the live batch!"},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 5 (first half)", note:"1.5 hr"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min"},
+      {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min"},
     ]
   },
   {
     day: "Day 6 — Wednesday", date: "Jul 15",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 11", note:"2.5 hr lecture"},
-      {t:"11:30–12:00", tag:"practice", title:"DPP: Lesson 11", note:""},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 12", note:"2.5 hr lecture — second one today"},
-      {t:"3:30–4:00", tag:"practice", title:"DPP: Lesson 12", note:""},
-      {t:"4:15–7:15", tag:"math", title:"Maths: Lesson 5", note:"3 hr lecture"},
-      {t:"7:15–7:45", tag:"practice", title:"DPP: Lesson 5 Maths", note:""},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 14", note:"2.5 hr lecture — now ahead of the live batch"},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 15", note:"2.5 hr lecture — second one today"},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 5 (second half)", note:"1.5 hr — completes Lesson 5"},
+      {t:"5:30–6:30", tag:"practice", title:"PYQs: Digital Electronics (Lessons 10–15)", note:"Checkpoint — next 6 lectures done, 1 hr on PYQs"},
+      {t:"6:30–7:00", tag:"rev", title:"Revision: Maths", note:"30 min"},
     ]
   },
   {
     day: "Day 7 — Thursday", date: "Jul 16",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 13", note:"2.5 hr lecture — this catches you up to the live batch"},
-      {t:"11:30–12:00", tag:"practice", title:"DPP: Lesson 13", note:""},
-      {t:"1:00–2:00", tag:"rev", title:"Full week revision: Digital Electronics (Lessons 4–13)", note:"Re-skim, no new content"},
-      {t:"2:00–3:00", tag:"rev", title:"Full week revision: Maths (Lessons 3–5)", note:"Redo 8–10 mixed problems from the week"},
-      {t:"3:00–4:00", tag:"practice", title:"PYQs: mixed set, both subjects", note:"Simulate a mini test — no notes open while solving"},
-      {t:"4:00–4:30", tag:"rev", title:"Quick self check-in", note:"What worked, what didn't — adjust next week's pace accordingly, not guilt"},
-      {t:"—", tag:"rest", title:"Evening: free", note:"You earned a real stop here — you'll be at Digital L13 (caught up!) and Maths L5"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 16", note:"2.5 hr lecture"},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 17", note:"2.5 hr lecture — second one today"},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 6 (first half)", note:"1.5 hr"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min"},
+      {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min"},
     ]
   },
 ];
