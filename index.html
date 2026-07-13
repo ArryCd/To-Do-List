@@ -135,7 +135,7 @@
 <body>
 <div class="wrap">
   <h1>This Week's Plan</h1>
-  <div class="sub">Math + Digital Electronics only — EMFT waits till EMT-II classes start. No daily DPPs — PYQs only at checkpoints, every 5–6 lectures. Tap a day to expand, tick as you go.</div>
+  <div class="sub">Digital every 3rd day (3 lectures back-to-back) — the other 2 days go heavy on Maths. PYQs only once a real topic block closes. EMFT starts once uni classes are confirmed (~20th).</div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   <div class="progress-label" id="progressLabel">0 / 0 done</div>
 
@@ -152,19 +152,19 @@ const data = [
   {
     day: "Day 1 — Friday", date: "Jul 10",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 4", note:"2.5 hr lecture"},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 5", note:"2.5 hr lecture — second one today"},
-      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 3 (first half)", note:"1.5 hr — spans into tomorrow"},
-      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min — skim Lessons 1–5"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 4", note:"2.5 hr lecture", done:true},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 5", note:"2.5 hr lecture — second one today", done:true},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 3 (first half)", note:"1.5 hr — spans into tomorrow", done:true},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min — skim Lessons 1–5", done:true},
       {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min — skim Lesson 3 so far"},
     ]
   },
   {
     day: "Day 2 — Saturday", date: "Jul 11",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 6", note:"2.5 hr lecture"},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 7", note:"2.5 hr lecture — second one today"},
-      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 3 (second half)", note:"1.5 hr — completes Lesson 3"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 6", note:"2.5 hr lecture", done:true},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 7", note:"2.5 hr lecture — second one today", done:true},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 3 (second half)", note:"1.5 hr — completes Lesson 3", done:true},
       {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min"},
       {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min — full Lesson 3 recap"},
     ]
@@ -172,63 +172,123 @@ const data = [
   {
     day: "Day 3 — Sunday", date: "Jul 12",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 8", note:"2.5 hr lecture"},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 9", note:"2.5 hr lecture — second one today"},
-      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 4 (first half)", note:"1.5 hr"},
-      {t:"5:30–6:30", tag:"practice", title:"PYQs: Digital Electronics (Lessons 4–9)", note:"Checkpoint — 6 lectures done, 1 hr on PYQs for this stretch"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 8", note:"2.5 hr lecture", done:true},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 9", note:"2.5 hr lecture — second one today", done:true},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 4 (first half)", note:"1.5 hr", done:true},
+      {t:"5:30–6:30", tag:"practice", title:"PYQs: Digital Electronics (Lessons 4–9)", note:"Checkpoint — 6 lectures done, 1 hr on PYQs for this stretch", done:true},
       {t:"6:30–7:00", tag:"rev", title:"Revision: Maths", note:"30 min"},
     ]
   },
   {
     day: "Day 4 — Monday", date: "Jul 13",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 10", note:"2.5 hr lecture"},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 11", note:"2.5 hr lecture — second one today"},
-      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 4 (second half)", note:"1.5 hr — completes Lesson 4"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 10", note:"2.5 hr lecture", done:true},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 11", note:"2.5 hr lecture — second one today", done:true},
+      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 4 (second half)", note:"1.5 hr — completes Lesson 4", done:true},
       {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min"},
       {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min — full Lesson 4 recap"},
     ]
   },
   {
-    day: "Day 5 — Tuesday", date: "Jul 14",
+    day: "Day 5 — Tuesday (today)", date: "Jul 14",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 12", note:"2.5 hr lecture"},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 13", note:"2.5 hr lecture — this catches you up to the live batch!"},
-      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 5 (first half)", note:"1.5 hr"},
-      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min"},
-      {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 12", note:"2.5 hr lecture", done:true},
+      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 13", note:"2.5 hr lecture — caught you up to the live batch", done:true},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min — skim Lessons 4–13"},
+      {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min — skim Lessons 3–4"},
+      {t:"6:30–9:00", tag:"digital", title:"Digital Electronics: Lesson 14", note:"2.5 hr — sir's latest lecture, do this last tonight to fully close the gap"},
     ]
   },
   {
     day: "Day 6 — Wednesday", date: "Jul 15",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 14", note:"2.5 hr lecture — now ahead of the live batch"},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 15", note:"2.5 hr lecture — second one today"},
-      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 5 (second half)", note:"1.5 hr — completes Lesson 5"},
-      {t:"5:30–6:30", tag:"practice", title:"PYQs: Digital Electronics (Lessons 10–15)", note:"Checkpoint — next 6 lectures done, 1 hr on PYQs"},
-      {t:"6:30–7:00", tag:"rev", title:"Revision: Maths", note:"30 min"},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 15", note:"2.5 hr lecture — Digital day, 3 back-to-back"},
+      {t:"12:00–2:30", tag:"digital", title:"Digital Electronics: Lesson 16", note:"2.5 hr lecture"},
+      {t:"3:00–5:30", tag:"digital", title:"Digital Electronics: Lesson 17", note:"2.5 hr lecture — third one today"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min — skim Lessons 14–17"},
+      {t:"6:00–7:30", tag:"math", title:"Maths: Lesson 5 (first half)", note:"1.5 hr — keeping this day math-light as planned"},
     ]
   },
   {
     day: "Day 7 — Thursday", date: "Jul 16",
     blocks: [
-      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 16", note:"2.5 hr lecture"},
-      {t:"1:00–3:30", tag:"digital", title:"Digital Electronics: Lesson 17", note:"2.5 hr lecture — second one today"},
-      {t:"4:00–5:30", tag:"math", title:"Maths: Lesson 6 (first half)", note:"1.5 hr"},
-      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min"},
-      {t:"6:00–6:30", tag:"rev", title:"Revision: Maths", note:"30 min"},
+      {t:"9:00–10:30", tag:"math", title:"Maths: Lesson 5 (second half)", note:"1.5 hr — completes Lesson 5"},
+      {t:"11:00–2:00", tag:"math", title:"Maths: Lesson 6", note:"3 hr lecture — math-heavy day"},
+      {t:"2:30–4:00", tag:"math", title:"Maths: Lesson 7 (first half)", note:"1.5 hr"},
+      {t:"4:00–4:30", tag:"rev", title:"Revision: Maths", note:"30 min — recap Lessons 5–7 so far"},
+    ]
+  },
+  {
+    day: "Day 8 — Friday", date: "Jul 17",
+    blocks: [
+      {t:"9:00–10:30", tag:"math", title:"Maths: Lesson 7 (second half)", note:"1.5 hr — completes Lesson 7"},
+      {t:"11:00–2:00", tag:"math", title:"Maths: Lesson 8", note:"3 hr lecture"},
+      {t:"2:30–5:30", tag:"math", title:"Maths: Lesson 9", note:"3 hr lecture — third full lecture today, this is the heaviest day of the cycle, ease off if it's dragging"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Maths", note:"30 min — recap Lessons 8–9"},
+    ]
+  },
+  {
+    day: "Day 9 — Saturday", date: "Jul 18",
+    blocks: [
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 18", note:"2.5 hr lecture — Digital day again, 3 back-to-back"},
+      {t:"12:00–2:30", tag:"digital", title:"Digital Electronics: Lesson 19", note:"2.5 hr lecture"},
+      {t:"3:00–5:30", tag:"digital", title:"Digital Electronics: Lesson 20", note:"2.5 hr lecture — third one today"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min — skim Lessons 18–20"},
+      {t:"6:00–7:30", tag:"math", title:"Maths: Lesson 10 (first half)", note:"1.5 hr — math-light on this Digital day"},
+    ]
+  },
+  {
+    day: "Day 10 — Sunday", date: "Jul 19",
+    blocks: [
+      {t:"9:00–10:30", tag:"math", title:"Maths: Lesson 10 (second half)", note:"1.5 hr — completes Lesson 10"},
+      {t:"11:00–2:00", tag:"math", title:"Maths: Lesson 11", note:"3 hr lecture — math-heavy day"},
+      {t:"2:30–4:00", tag:"math", title:"Maths: Lesson 12 (first half)", note:"1.5 hr"},
+      {t:"4:00–4:30", tag:"rev", title:"Revision: Maths", note:"30 min — recap Lessons 10–12 so far"},
+      {t:"4:30–5:30", tag:"practice", title:"PYQs: Maths (Lessons 3–9)", note:"First real Maths checkpoint — a topic block should be genuinely closed by now"},
+    ]
+  },
+  {
+    day: "Day 11 — Monday", date: "Jul 20",
+    blocks: [
+      {t:"9:00–10:30", tag:"math", title:"Maths: Lesson 12 (second half)", note:"1.5 hr — completes Lesson 12"},
+      {t:"11:00–2:00", tag:"math", title:"Maths: Lesson 13", note:"3 hr lecture"},
+      {t:"2:30–5:30", tag:"math", title:"Maths: Lesson 14", note:"3 hr lecture — heaviest day of this cycle again"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Maths", note:"30 min — recap Lessons 13–14"},
+    ]
+  },
+  {
+    day: "Day 12 — Tuesday", date: "Jul 21",
+    blocks: [
+      {t:"—", tag:"rest", title:"EMFT self-study begins around here", note:"Once university EMT-II classes are confirmed starting (~20th), start EMFT alongside them so uni lectures and self-study reinforce each other. Check in and I'll build the combined schedule."},
+      {t:"9:00–11:30", tag:"digital", title:"Digital Electronics: Lesson 21", note:"2.5 hr lecture — Digital day, 3 back-to-back"},
+      {t:"12:00–2:30", tag:"digital", title:"Digital Electronics: Lesson 22", note:"2.5 hr lecture"},
+      {t:"3:00–5:30", tag:"digital", title:"Digital Electronics: Lesson 23", note:"2.5 hr lecture — third one today"},
+      {t:"5:30–6:00", tag:"rev", title:"Revision: Digital Electronics", note:"30 min — skim Lessons 21–23"},
     ]
   },
 ];
 
 const container = document.getElementById("days");
-const STORAGE_KEY = "week_schedule_v1";
+const STORAGE_KEY = "week_schedule_v2";
 let state = {};
 try { state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { state = {}; }
+
+// Seed defaults for tasks already marked done, without overwriting any existing saved state
+let seeded = false;
+data.forEach((d, di) => {
+  d.blocks.forEach((b, bi) => {
+    const key = di+"-"+bi;
+    if (state[key] === undefined && b.done) {
+      state[key] = true;
+      seeded = true;
+    }
+  });
+});
 
 function save() {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
 }
+if (seeded) save();
 
 function updateProgress() {
   let total = 0, done = 0;
@@ -256,7 +316,7 @@ data.forEach((d, di) => {
 
   const body = document.createElement("div");
   body.className = "day-body";
-  if (di === 0) body.classList.add("open");
+  if (di === 4) body.classList.add("open");
 
   d.blocks.forEach((b, bi) => {
     const key = di+"-"+bi;
